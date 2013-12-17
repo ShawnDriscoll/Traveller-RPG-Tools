@@ -1,4 +1,3 @@
-#   For Python 2.5.4
 #
 #   To use this function: from solomani_dna import check_dna
 #
