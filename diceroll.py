@@ -8,12 +8,7 @@
 from random import randint
 
 def roll(dice):
-    """
-Usage:
-roll('2D6')   this will roll two D6 dice
-roll('D66')   this will roll a D66
-roll('D00')   this will roll a D100
-roll('1D6+6') this will roll a D6 and add 6 to it"""
+    "\nUsage: roll('2D6')   this will roll two D6 dice\n       roll('D66')   this will roll a D66\n       roll('D00')   this will roll a D100\n       roll('1D6+6') this will roll a D6 and add 6 to it\n"
     dm = 0
     # is there any modifier added?
     if len(dice) > 3:
