@@ -192,16 +192,16 @@ void _main(void)
 					strcat(word,v_sounds[random(37)]);
     				//sound = v_sounds[random(114)][3];
 				if (syllable == CV)
-						strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]);
+					strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]);
 					//sound = ic_sounds[random(789)] + v_sounds[random(114)];
 				if (syllable == VC)
-						strcat(strcat(word,v_sounds[random(37)]),fc_sounds[random(484)]);
+					strcat(strcat(word,v_sounds[random(37)]),fc_sounds[random(484)]);
 					//sound = v_sounds[random(114)] + fc_sounds[random(1465)];
 				if (syllable == CVC)
-						strcat(strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]),fc_sounds[random(484)]);
+					strcat(strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]),fc_sounds[random(484)]);
 					//sound = ic_sounds[random(789)] + v_sounds[random(114)] + fc_sounds[random(1465)];
 				if (syllable == CC)
-						strcat(word,mc_sounds[random(63)]);
+					strcat(word,mc_sounds[random(63)]);
 					//sound = mc_sounds[random(176)];
                 temp = syllable;
             }
@@ -276,16 +276,16 @@ void _main(void)
 					strcat(word,v_sounds[random(37)]);
     				//sound = v_sounds[random(114)][3];
 				if (syllable == CV)
-						strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]);
+					strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]);
 					//sound = ic_sounds[random(789)] + v_sounds[random(114)];
 				if (syllable == VC)
-						strcat(strcat(word,v_sounds[random(37)]),fc_sounds[random(484)]);
+					strcat(strcat(word,v_sounds[random(37)]),fc_sounds[random(484)]);
 					//sound = v_sounds[random(114)] + fc_sounds[random(1465)];
 				if (syllable == CVC)
-						strcat(strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]),fc_sounds[random(484)]);
+					strcat(strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]),fc_sounds[random(484)]);
 					//sound = ic_sounds[random(789)] + v_sounds[random(114)] + fc_sounds[random(1465)];
 				if (syllable == CC)
-						strcat(word,mc_sounds[random(63)]);
+					strcat(word,mc_sounds[random(63)]);
 					//sound = mc_sounds[random(176)];
                 temp = syllable;
             }

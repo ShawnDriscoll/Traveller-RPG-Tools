@@ -1,3 +1,4 @@
+//
 //	diceroll.h -- Called by solomani.c
 //
 //	Compile with TI-GCC for execution on a TI-89
