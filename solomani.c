@@ -5,6 +5,8 @@
 * initial date: 09/13/2013
 * author:       shawndriscoll@hotmail.com
 *
+* Compile with TI-GCC for execution on a TI-89
+*
 ******************************************************************************/
  
 #include <tigcclib.h>
@@ -86,9 +88,6 @@ int syllable;
 int letter;
 int looping = TRUE;
 
-static int seed = 0;
-
-
 	
 // -------------------------------------------------------------------------
 //  START PROGRAM
@@ -140,7 +139,6 @@ void _main(void)
     //ngetchx();
 
 		randomize();
-		seed = 1;
     
     while (looping){
     

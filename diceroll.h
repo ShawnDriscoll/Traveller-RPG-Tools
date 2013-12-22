@@ -1,5 +1,10 @@
-// Header File
-// Created 9/12/2013; 1:09:08 PM
+//	diceroll.h -- Called by solomani.c
+//
+//	Compile with TI-GCC for execution on a TI-89
+//
+//	Written by Shawn Driscoll
+//	shawndriscoll@hotmail.com
+//
 
 int die_roll(int die)
 	{ 
