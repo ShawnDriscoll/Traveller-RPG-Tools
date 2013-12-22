@@ -3,7 +3,8 @@
 * project name: Mongoose Traveller Solomani Name Generator
 * file name:    solomani.c 
 * initial date: 09/13/2013
-* author:       shawndriscoll@hotmail.com
+* author:       Shawn Driscoll
+* email:        shawndriscoll@hotmail.com
 *
 * Compile with TI-GCC for execution on a TI-89
 *
@@ -17,7 +18,7 @@ int _ti89;
 
 // Characteristic values/indexes
 
-int i, j, k, l; 						// loop counters
+int i, j, k, l; 				// loop counters
 int proper, building;  			// boolean use
 int temp;
 
