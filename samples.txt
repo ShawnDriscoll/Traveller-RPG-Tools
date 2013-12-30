@@ -1,0 +1,102 @@
+Python 2.5.4 (r254:67916, Dec 23 2008, 15:10:54) [MSC v.1310 32 bit (Intel)] on win32
+Type "copyright", "credits" or "license()" for more information.
+
+    ****************************************************************
+    Personal firewall software may warn about the connection IDLE
+    makes to its subprocess using this computer's internal loopback
+    interface.  This connection is not visible on any external
+    interface and no data is sent to or received from the Internet.
+    ****************************************************************
+    
+IDLE 1.2.4      ==== No Subprocess ====
+>>> 
+{'Mgc': 5, 'Dex': 5, 'Atk': 5, 'Fst': 5, 'Vit': 5, 'Def': 5}
+9
+>>> Stats
+{'Mgc': 5, 'Dex': 5, 'Atk': 5, 'Fst': 5, 'Vit': 5, 'Def': 5}
+>>> Stats[0]
+Traceback (most recent call last):
+  File "<pyshell#1>", line 1, in <module>
+    Stats[0]
+KeyError: 0
+>>> Stats['Mgc']
+5
+>>> Stat_names = ['Mgc', 'Dex', 'Atk', 'Fst', 'Vit', 'Def']
+>>> Stat_names
+['Mgc', 'Dex', 'Atk', 'Fst', 'Vit', 'Def']
+>>> for i in Stat_names: print i
+
+Mgc
+Dex
+Atk
+Fst
+Vit
+Def
+>>> for i in Stat_names: print Stats[i]
+
+5
+5
+5
+5
+5
+5
+>>> for i in Stat_names: Stats[i] = StatS_name[i] * 2 + 380
+
+Traceback (most recent call last):
+  File "<pyshell#10>", line 1, in <module>
+    for i in Stat_names: Stats[i] = StatS_name[i] * 2 + 380
+NameError: name 'StatS_name' is not defined
+>>> for i in Stat_names: Stats[i] = Stats[i] * 2 + 380
+
+>>> for i in Stat_names: print Stats[i]
+
+390
+390
+390
+390
+390
+390
+>>> for i in Stat_names: Stats[i] = 5
+
+>>> for i in Stat_names: print Stats[i]
+
+5
+5
+5
+5
+5
+5
+>>> xp_points = []
+>>> for i in range (101):
+	xp_points.append() = 0
+	
+SyntaxError: can't assign to function call
+>>> for i in range(101):
+	xp_points.append(i * 2 + 380)
+
+	
+>>> print xp_points[0]
+380
+>>> print xp_points[1]
+382
+>>> print xp_points[2]
+384
+>>> print xp_points[100]
+580
+>>> print xp_points[101]
+Traceback (most recent call last):
+  File "<pyshell#30>", line 1, in <module>
+    print xp_points[101]
+IndexError: list index out of range
+>>> Stats
+{'Mgc': 5, 'Dex': 5, 'Atk': 5, 'Fst': 5, 'Vit': 5, 'Def': 5}
+>>> Stats['Atk'] = xp_points[50]
+>>> Stats
+{'Mgc': 5, 'Dex': 5, 'Atk': 480, 'Fst': 5, 'Vit': 5, 'Def': 5}
+>>> Stats['Atk'] += 5
+>>> Stats
+{'Mgc': 5, 'Dex': 5, 'Atk': 485, 'Fst': 5, 'Vit': 5, 'Def': 5}
+>>> Stats['Dex'] += xp_points[12]
+>>> Stats
+{'Mgc': 5, 'Dex': 409, 'Atk': 485, 'Fst': 5, 'Vit': 5, 'Def': 5}
+>>> 
