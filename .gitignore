@@ -1,0 +1,41 @@
+# Numerous always-ignore extensions
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.swo
+*.swp
+*.vi
+*.scssc
+*~
+
+# OS or Editor folders
+.DS_Store
+.cache
+.project
+.settings
+nbproject
+thumbs.db
+
+# Dreamweaver added files
+_notes
+dwsync.xml
+
+# Komodo
+*.komodoproject
+.komodotools
+
+# Folders to ignore
+.hg
+.svn
+publish
+.idea
+.sass-cache
+_site
+.jekyll
+node_modules
+
+# build script local files
+build/buildinfo.properties
+build/config/buildinfo.properties
