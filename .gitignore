@@ -1,4 +1,24 @@
 
+###########
+##Eclipse
+###########
+.plugins/
+.lock
+.log
+.ini
+.metadata/
+.project
+.settings/
+.pydevproject
+org.*
+com.*
+.classpath
+*.ini
+*.log
+/Debug
+/Release
+.cproject
+
 #############
 ## Windows detritus
 #############
@@ -33,11 +53,6 @@ develop-eggs/
 .installed.cfg
 
 ############
-## PyCharm
-############
-*.idea
-
-############
 ## TI-GCC
 ############
 *.tpr
@@ -48,11 +63,11 @@ develop-eggs/
 *.s
 
 ###########
-## Jython
-###########
-*.class
-
-###########
 ## gcc
 ###########
 *.exe
+
+###########
+## Jython
+###########
+*.class

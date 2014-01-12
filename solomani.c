@@ -2,7 +2,7 @@
 *
 * project name: Mongoose Traveller Solomani Name Generator
 * file name:    solomani.c
-* initial date: 09/13/2013
+* initial date: 01/11/2014
 * author:       Shawn Driscoll
 * email:        shawndriscoll@hotmail.com
 *
@@ -11,7 +11,6 @@
 ******************************************************************************/
 
 #include <tigcclib.h>
-#include "diceroll.h"
 
 int _ti92plus;
 int _ti89;
@@ -31,7 +30,7 @@ int c_Soc = 5;
 
 int characteristic[6];
 char characteristic_name[6][4] = {"STR","DEX","END","INT","EDU","SOC"};
-int characteristic_dm[] =   {-3,-2,-2,-1,-1,-1,0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5};
+int characteristic_dm[] = {-3,-2,-2,-1,-1,-1,0,0,0,1,1,1,2,2,2,3,3,3,4,4,4,5,5,5};
 
 char hex_code[25] = {"0123456789ABCDEFGHIJKL"};
 
@@ -89,6 +88,135 @@ int syllable;
 int letter;
 int looping = TRUE;
 
+int die_roll(int die)
+{
+    return random(die) + 1;
+}
+
+int roll(char dice[10])
+{
+    int value;
+    int i;
+
+    // String has to be 3 or 5 in length!
+    if (strlen(dice) == 3 || ((strlen(dice) == 5) && (dice[3] == 43 || dice[3] == 45)))
+    {
+        if (dice[0] == 68)                                  // "D" is at beginning of roll string?
+        {
+            if (dice[1] == 54 && dice[2] == 54 && strlen(dice) == 3) // D66 rolled?
+            {
+                return die_roll(6) * 10 + die_roll(6);      // 11 - 66, no DMs allowed
+            }
+            if (dice[1] == 48 && dice[2] == 48)             // D00 rolled?
+            {
+                value = (die_roll(10) - 1) * 10 + die_roll(10);     // 1 - 100
+                if (dice[3] == 43 || dice[3] == 45)         // Is there a +/- DM to apply?
+                {
+                    if (dice[3] == 43)                      // A +DM?
+                    {
+                        value += dice[4] - 48;
+                    }
+                    else                                    // A -DM?
+                    {
+                        value += -(dice[4] - 48);
+                    }
+                }
+                return value;
+            }
+            if (dice[1] == 49 && dice[2] == 48)             // D10 rolled?
+            {
+                value = die_roll(10);                       // 1 - 10
+                if (dice[3] == 43 || dice[3] == 45)         // Is there a +/- DM to apply?
+                {
+                    if (dice[3] == 43)                      // A +DM?
+                    {
+                        value += dice[4] - 48;
+                    }
+                    else                                    // A -DM?
+                    {
+                        value += -(dice[4] - 48);
+                    }
+                }
+                return value;
+            }
+            if (dice[1] == 50 && dice[2] == 48)             // D20 rolled?
+            {
+                value = die_roll(20);                       // 1 - 20
+                if (dice[3] == 43 || dice[3] == 45)         // Is there a +/- DM to apply?
+                {
+                    if (dice[3] == 43)                      // A +DM?
+                    {
+                        value += dice[4] - 48;
+                    }
+                    else                                    // A -DM?
+                    {
+                        value += -(dice[4] - 48);
+                    }
+                }
+                return value;
+            }
+            if (dice[1] == 51 && dice[2] == 48)             // D30 rolled?
+            {
+                value = die_roll(30);                       // 1 - 30
+                if (dice[3] == 43 || dice[3] == 45)         // Is there a +/- DM to apply?
+                {
+                    if (dice[3] == 43)                      // A +DM?
+                    {
+                        value += dice[4] - 48;
+                    }
+                    else                                    // A -DM?
+                    {
+                        value += -(dice[4] - 48);
+                    }
+                }
+                return value;
+            }
+            if (dice[1] == 49 && dice[2] == 50)             // D12 rolled?
+            {
+                value = die_roll(12);                       // 1 - 12
+                if (dice[3] == 43 || dice[3] == 45)         // Is there a +/- DM to apply?
+                {
+                    if (dice[3] == 43)                      // A +DM?
+                    {
+                        value += dice[4] - 48;
+                    }
+                    else                                    // A -DM?
+                    {
+                        value += -(dice[4] - 48);
+                    }
+                }
+                return value;
+            }
+        }
+        else
+        {
+            if (dice[1] == 68)                              // "D" is in middle of roll string?
+            {
+                if (dice[0] >= 49 && dice[0] <= 57 && (dice[2] == 52 || dice[2] == 54 || dice[2] == 56))
+                {                                           // How many dice, and how many sides?
+                    value = 0;
+                    for (i = 1; i < dice[0] - 47; i++)      // Roll the number of dice
+                        value += die_roll(dice[2] - 48);    // Add this die roll type to the total
+                    if (dice[3] == 43 || dice[3] == 45)     // Is there a +/- DM to apply?
+                    {
+                        if (dice[3] == 43)                  // A +DM?
+                        {
+                            value += dice[4] - 48;
+                        }
+                        else                                // A -DM?
+                        {
+                            value += -(dice[4] - 48);
+                        }
+                    }
+                    return value;
+                }
+            }
+        }
+    }
+    printf("** DICE ERROR! **\n'%s' is unknown ", dice);
+    return 0;
+}
+
 
 // -------------------------------------------------------------------------
 //  START PROGRAM
@@ -141,196 +269,196 @@ void _main(void)
 
     randomize();
 
-    while (looping){
-
-//  roll characteristics
-
-    for (i = 0; i < 6; i++)
-        characteristic[i] = roll("2D6");
-//  characteristic[c_Soc] = 12;
-
-    proper = FALSE;
-    while (!proper)
+    while (looping)
     {
-        word[0] = 0;
-        temp = CC;
-        while (temp == CC)
-            temp = syllable_type[random(15)];
-        if (temp == V)
-            strcat(word,v_sounds[random(37)]);
-            //sound = v_sounds[random(114)][3];
-        if (temp == CV)
-            strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]);
-            //sound = ic_sounds[random(789)] + v_sounds[random(114)];
-        if (temp == VC)
-            strcat(strcat(word,v_sounds[random(37)]),fc_sounds[random(484)]);
-            //sound = v_sounds[random(114)] + fc_sounds[random(1465)];
-        if (temp == CVC)
-            strcat(strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]),fc_sounds[random(484)]);
-            //sound = ic_sounds[random(789)] + v_sounds[random(114)] + fc_sounds[random(1465)];
-        if (temp == CC)
-            strcat(word,mc_sounds[random(63)]);
-            //sound = mc_sounds[random(176)];
-        building = TRUE;
-        while (building)
+    //  roll characteristics
+
+        for (i = 0; i < 6; i++)
+            characteristic[i] = roll("2D6");
+    //  characteristic[c_Soc] = 12;
+
+        proper = FALSE;
+        while (!proper)
         {
-            syllable = syllable_type[random(15)];
-            while (temp == CC && (syllable == CV || syllable == CVC || syllable == CC))
-                syllable = syllable_type[random(15)];
-            while (temp == V && (syllable == V || syllable == VC))
-                syllable = syllable_type[random(15)];
-            while (temp == CV && (syllable == V || syllable == VC))
-                syllable = syllable_type[random(15)];
-            while (temp == VC && (syllable == CV || syllable == CVC || syllable == CC))
-                syllable = syllable_type[random(15)];
-            while (temp == CVC && (syllable == CV || syllable == CVC || syllable == CC))
-                syllable = syllable_type[random(15)];
-            if (temp == VC || temp == CVC)
-                building = FALSE;
-            else
+            word[0] = 0;
+            temp = CC;
+            while (temp == CC)
+                temp = syllable_type[random(15)];
+            if (temp == V)
+                strcat(word,v_sounds[random(37)]);
+                //sound = v_sounds[random(114)][3];
+            if (temp == CV)
+                strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]);
+                //sound = ic_sounds[random(789)] + v_sounds[random(114)];
+            if (temp == VC)
+                strcat(strcat(word,v_sounds[random(37)]),fc_sounds[random(484)]);
+                //sound = v_sounds[random(114)] + fc_sounds[random(1465)];
+            if (temp == CVC)
+                strcat(strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]),fc_sounds[random(484)]);
+                //sound = ic_sounds[random(789)] + v_sounds[random(114)] + fc_sounds[random(1465)];
+            if (temp == CC)
+                strcat(word,mc_sounds[random(63)]);
+                //sound = mc_sounds[random(176)];
+            building = TRUE;
+            while (building)
             {
-                if (syllable == V)
-                    strcat(word,v_sounds[random(37)]);
-                    //sound = v_sounds[random(114)][3];
-                if (syllable == CV)
-                    strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]);
-                    //sound = ic_sounds[random(789)] + v_sounds[random(114)];
-                if (syllable == VC)
-                    strcat(strcat(word,v_sounds[random(37)]),fc_sounds[random(484)]);
-                    //sound = v_sounds[random(114)] + fc_sounds[random(1465)];
-                if (syllable == CVC)
-                    strcat(strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]),fc_sounds[random(484)]);
-                    //sound = ic_sounds[random(789)] + v_sounds[random(114)] + fc_sounds[random(1465)];
-                if (syllable == CC)
-                    strcat(word,mc_sounds[random(63)]);
-                    //sound = mc_sounds[random(176)];
-                temp = syllable;
+                syllable = syllable_type[random(15)];
+                while (temp == CC && (syllable == CV || syllable == CVC || syllable == CC))
+                    syllable = syllable_type[random(15)];
+                while (temp == V && (syllable == V || syllable == VC))
+                    syllable = syllable_type[random(15)];
+                while (temp == CV && (syllable == V || syllable == VC))
+                    syllable = syllable_type[random(15)];
+                while (temp == VC && (syllable == CV || syllable == CVC || syllable == CC))
+                    syllable = syllable_type[random(15)];
+                while (temp == CVC && (syllable == CV || syllable == CVC || syllable == CC))
+                    syllable = syllable_type[random(15)];
+                if (temp == VC || temp == CVC)
+                    building = FALSE;
+                else
+                {
+                    if (syllable == V)
+                        strcat(word,v_sounds[random(37)]);
+                        //sound = v_sounds[random(114)][3];
+                    if (syllable == CV)
+                        strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]);
+                        //sound = ic_sounds[random(789)] + v_sounds[random(114)];
+                    if (syllable == VC)
+                        strcat(strcat(word,v_sounds[random(37)]),fc_sounds[random(484)]);
+                        //sound = v_sounds[random(114)] + fc_sounds[random(1465)];
+                    if (syllable == CVC)
+                        strcat(strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]),fc_sounds[random(484)]);
+                        //sound = ic_sounds[random(789)] + v_sounds[random(114)] + fc_sounds[random(1465)];
+                    if (syllable == CC)
+                        strcat(word,mc_sounds[random(63)]);
+                        //sound = mc_sounds[random(176)];
+                    temp = syllable;
+                }
             }
+            if (strlen(word) > 2 && strlen(word) < 10)
+                proper = TRUE;
         }
-        if (strlen(word) > 2 && strlen(word) < 10)
-            proper = TRUE;
-    }
 
-//  clear the screen
-    clrscr();
+    //  clear the screen
+        clrscr();
 
-//  First name
+    //  First name
 
-    first_name[0] = 0;
-    letter = word[0];
-    letter = letter - 32;
-    word[0] = letter;
+        first_name[0] = 0;
+        letter = word[0];
+        letter = letter - 32;
+        word[0] = letter;
 
-    strcat(first_name,word);
+        strcat(first_name,word);
 
-    printf("%s ",first_name);
+        printf("%s ",first_name);
 
-    sex[0] = 0;
+        sex[0] = 0;
 
-    if (word[0] == 65 || word[0] == 69 || word[0] == 73 || word[0] == 85 \
-           || word[0] == 89 || word[strlen(word) - 1] == 97 || word[strlen(word) - 1] == 105)
-        strcat(sex,"Female");
-    else
-        strcat(sex,"Male");
+        if (word[0] == 65 || word[0] == 69 || word[0] == 73 || word[0] == 85 \
+               || word[0] == 89 || word[strlen(word) - 1] == 97 || word[strlen(word) - 1] == 105)
+            strcat(sex,"Female");
+        else
+            strcat(sex,"Male");
 
-    proper = FALSE;
-    while (!proper)
-    {
-        word[0] = 0;
-        temp = CC;
-        while (temp == CC)
-            temp = syllable_type[random(15)];
-        if (temp == V)
-            strcat(word,v_sounds[random(37)]);
-            //sound = v_sounds[random(114)][3];
-        if (temp == CV)
-            strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]);
-            //sound = ic_sounds[random(789)] + v_sounds[random(114)];
-        if (temp == VC)
-            strcat(strcat(word,v_sounds[random(37)]),fc_sounds[random(484)]);
-            //sound = v_sounds[random(114)] + fc_sounds[random(1465)];
-        if (temp == CVC)
-            strcat(strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]),fc_sounds[random(484)]);
-            //sound = ic_sounds[random(789)] + v_sounds[random(114)] + fc_sounds[random(1465)];
-        if (temp == CC)
-            strcat(word,mc_sounds[random(63)]);
-            //sound = mc_sounds[random(176)];
-        building = TRUE;
-        while (building)
+        proper = FALSE;
+        while (!proper)
         {
-            syllable = syllable_type[random(15)];
-            while (temp == CC && (syllable == CV || syllable == CVC || syllable == CC))
-                syllable = syllable_type[random(15)];
-            while (temp == V && (syllable == V || syllable == VC))
-                syllable = syllable_type[random(15)];
-            while (temp == CV && (syllable == V || syllable == VC))
-                syllable = syllable_type[random(15)];
-            while (temp == VC && (syllable == CV || syllable == CVC || syllable == CC))
-                syllable = syllable_type[random(15)];
-            while (temp == CVC && (syllable == CV || syllable == CVC || syllable == CC))
-                syllable = syllable_type[random(15)];
-            if (temp == VC || temp == CVC)
-                building = FALSE;
-            else
+            word[0] = 0;
+            temp = CC;
+            while (temp == CC)
+                temp = syllable_type[random(15)];
+            if (temp == V)
+                strcat(word,v_sounds[random(37)]);
+                //sound = v_sounds[random(114)][3];
+            if (temp == CV)
+                strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]);
+                //sound = ic_sounds[random(789)] + v_sounds[random(114)];
+            if (temp == VC)
+                strcat(strcat(word,v_sounds[random(37)]),fc_sounds[random(484)]);
+                //sound = v_sounds[random(114)] + fc_sounds[random(1465)];
+            if (temp == CVC)
+                strcat(strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]),fc_sounds[random(484)]);
+                //sound = ic_sounds[random(789)] + v_sounds[random(114)] + fc_sounds[random(1465)];
+            if (temp == CC)
+                strcat(word,mc_sounds[random(63)]);
+                //sound = mc_sounds[random(176)];
+            building = TRUE;
+            while (building)
             {
-                if (syllable == V)
-                    strcat(word,v_sounds[random(37)]);
-                    //sound = v_sounds[random(114)][3];
-                if (syllable == CV)
-                    strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]);
-                    //sound = ic_sounds[random(789)] + v_sounds[random(114)];
-                if (syllable == VC)
-                    strcat(strcat(word,v_sounds[random(37)]),fc_sounds[random(484)]);
-                    //sound = v_sounds[random(114)] + fc_sounds[random(1465)];
-                if (syllable == CVC)
-                    strcat(strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]),fc_sounds[random(484)]);
-                    //sound = ic_sounds[random(789)] + v_sounds[random(114)] + fc_sounds[random(1465)];
-                if (syllable == CC)
-                    strcat(word,mc_sounds[random(63)]);
-                    //sound = mc_sounds[random(176)];
-                temp = syllable;
+                syllable = syllable_type[random(15)];
+                while (temp == CC && (syllable == CV || syllable == CVC || syllable == CC))
+                    syllable = syllable_type[random(15)];
+                while (temp == V && (syllable == V || syllable == VC))
+                    syllable = syllable_type[random(15)];
+                while (temp == CV && (syllable == V || syllable == VC))
+                    syllable = syllable_type[random(15)];
+                while (temp == VC && (syllable == CV || syllable == CVC || syllable == CC))
+                    syllable = syllable_type[random(15)];
+                while (temp == CVC && (syllable == CV || syllable == CVC || syllable == CC))
+                    syllable = syllable_type[random(15)];
+                if (temp == VC || temp == CVC)
+                    building = FALSE;
+                else
+                {
+                    if (syllable == V)
+                        strcat(word,v_sounds[random(37)]);
+                        //sound = v_sounds[random(114)][3];
+                    if (syllable == CV)
+                        strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]);
+                        //sound = ic_sounds[random(789)] + v_sounds[random(114)];
+                    if (syllable == VC)
+                        strcat(strcat(word,v_sounds[random(37)]),fc_sounds[random(484)]);
+                        //sound = v_sounds[random(114)] + fc_sounds[random(1465)];
+                    if (syllable == CVC)
+                        strcat(strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]),fc_sounds[random(484)]);
+                        //sound = ic_sounds[random(789)] + v_sounds[random(114)] + fc_sounds[random(1465)];
+                    if (syllable == CC)
+                        strcat(word,mc_sounds[random(63)]);
+                        //sound = mc_sounds[random(176)];
+                    temp = syllable;
+                }
             }
+            if (strlen(word) > 2 && strlen(word) < 14)
+                proper = TRUE;
         }
-        if (strlen(word) > 2 && strlen(word) < 14)
-            proper = TRUE;
-    }
 
-//  Last name
+    //  Last name
 
-    last_name[0] = 0;
-    letter = word[0];
-    letter = letter - 32;
-    word[0] = letter;
+        last_name[0] = 0;
+        letter = word[0];
+        letter = letter - 32;
+        word[0] = letter;
 
-    strcat(last_name,word);
+        strcat(last_name,word);
 
-    printf("%s\n\n",last_name);
+        printf("%s\n\n",last_name);
 
-//  Print character
+    //  Print character
 
-    printf("UPP: [");
-    for (i = 0; i < 6; i++)
-        printf("%c", hex_code[characteristic[i]]);
-    printf("]  Sex: %s\n\n", sex);
+        printf("UPP: [");
+        for (i = 0; i < 6; i++)
+            printf("%c", hex_code[characteristic[i]]);
+        printf("]  Sex: %s\n\n", sex);
 
-    for (i = 0; i < 3; i++)
-        printf("%s:%2d  ", characteristic_name[i], characteristic[i]);
-    printf("\n");
+        for (i = 0; i < 3; i++)
+            printf("%s:%2d  ", characteristic_name[i], characteristic[i]);
+        printf("\n");
 
-    for (i = 0; i < 3; i++)
-        printf("Mod %2d  ", characteristic_dm[characteristic[i]]);
-    printf("\n\n");
+        for (i = 0; i < 3; i++)
+            printf("Mod %2d  ", characteristic_dm[characteristic[i]]);
+        printf("\n\n");
 
-    for (i = 3; i < 6; i++)
-        printf("%s:%2d  ", characteristic_name[i], characteristic[i]);
-    printf("\n");
+        for (i = 3; i < 6; i++)
+            printf("%s:%2d  ", characteristic_name[i], characteristic[i]);
+        printf("\n");
 
-    for (i = 3; i < 6; i++)
-        printf("Mod %2d  ", characteristic_dm[characteristic[i]]);
+        for (i = 3; i < 6; i++)
+            printf("Mod %2d  ", characteristic_dm[characteristic[i]]);
 
-    ST_showHelp("Programmed by shawndriscoll@hotmail.com");
-//  wait for a key press before the program exits
-    if (ngetchx () == 13)
-        looping = FALSE;
+        ST_showHelp("Programmed by shawndriscoll@hotmail.com");
+    //  wait for a key press before the program exits
+        if (ngetchx () == 13)
+            looping = FALSE;
     }
 }
