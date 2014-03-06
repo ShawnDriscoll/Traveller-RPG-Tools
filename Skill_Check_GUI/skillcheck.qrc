@@ -1,0 +1,31 @@
+<RCC>
+  <qresource prefix="/">
+    <file>images/die1_0.png</file>
+    <file>images/die2_0.png</file>
+    <file>images/die1_1.png</file>
+    <file>images/die2_1.png</file>
+    <file>images/die1_2.png</file>
+    <file>images/die2_2.png</file>
+    <file>images/die1_3.png</file>
+    <file>images/die2_3.png</file>
+    <file>images/die1_4.png</file>
+    <file>images/die2_4.png</file>
+    <file>images/die1_5.png</file>
+    <file>images/die2_5.png</file>
+    <file>images/die1_6.png</file>
+    <file>images/die2_6.png</file>
+    <file>images/sc_dialog.png</file>
+    <file>images/sc_icon_16x16.png</file>
+    <file>images/shonner_brand.png</file>
+    <file>sounds/skill_check.wav</file>
+    <file>sounds/marginal_success.wav</file>
+    <file>sounds/marginal_failure.wav</file>
+    <file>sounds/running_silent.wav</file>
+    <file>sounds/activated.wav</file>
+    <file>sounds/average_success.wav</file>
+    <file>sounds/average_failure.wav</file>
+    <file>sounds/exceptional_success.wav</file>
+    <file>sounds/exceptional_failure.wav</file>
+    <file>sounds/traveller_ownership.wav</file>
+  </qresource>
+</RCC>
