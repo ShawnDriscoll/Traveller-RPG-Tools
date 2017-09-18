@@ -2,7 +2,7 @@
 *
 * project name: Mongoose Traveller Solomani Name Generator
 * file name:    solomani.c
-* initial date: 01/11/2014
+* initial date: 07/22/2017
 * author:       Shawn Driscoll
 * email:        shawndriscoll@hotmail.com
 *
@@ -36,13 +36,14 @@ char hex_code[25] = {"0123456789ABCDEFGHIJKL"};
 
 char sex[7];
 
-//  Sound Tables
+/* //  Sound Tables
 
 int V   = 1;
 int CV  = 2;
 int VC  = 3;
 int CVC = 4;
 int CC  = 5;
+char text1[] = "     ";
 
 char ic_sound[45][3] = {"b","bl","br","c","ch","cl","cr","d","dr","f","fl","fr","g","gl",
                         "gr","h","j","k","kl","l","m","n","p","ph","pl","pr","qu",
@@ -85,7 +86,7 @@ char word[64];
 char first_name[64];
 char last_name[64];
 int syllable;
-int letter;
+int letter; */
 int looping = TRUE;
 
 int die_roll(int die)
@@ -101,7 +102,7 @@ int roll(char dice[10])
     // String has to be 3 or 5 in length!
     if (strlen(dice) == 3 || ((strlen(dice) == 5) && (dice[3] == 43 || dice[3] == 45)))
     {
-        if (dice[0] == 68)                                  // "D" is at beginning of roll string?
+        if (dice[0] == 68 || dice[0] == 100)                 // "D" is at beginning of roll string?
         {
             if (dice[1] == 54 && dice[2] == 54 && strlen(dice) == 3) // D66 rolled?
             {
@@ -190,9 +191,10 @@ int roll(char dice[10])
         }
         else
         {
-            if (dice[1] == 68)                              // "D" is in middle of roll string?
+            if (dice[1] == 68 || dice[1] == 100)            // "D" is in middle of roll string?
             {
-                if (dice[0] >= 49 && dice[0] <= 57 && (dice[2] == 52 || dice[2] == 54 || dice[2] == 56))
+                //if (dice[0] >= 49 && dice[0] <= 57 && (dice[2] == 52 || dice[2] == 54 || dice[2] == 56))
+                if (dice[0] >= 49 && dice[0] <= 57 && (dice[2] >= 50 && dice[2] <= 57))
                 {                                           // How many dice, and how many sides?
                     value = 0;
                     for (i = 1; i < dice[0] - 47; i++)      // Roll the number of dice
@@ -223,7 +225,7 @@ int roll(char dice[10])
 
 void _main(void)
 {
-
+/* 
 //  Make name
 
     k = 0;
@@ -265,7 +267,7 @@ void _main(void)
             printf("%s ",fc_sounds[k]);
             k++;
         }
-//  ngetchx();
+//  ngetchx(); */
 
     randomize();
 
@@ -277,7 +279,7 @@ void _main(void)
             characteristic[i] = roll("2D6");
     //  characteristic[c_Soc] = 12;
 
-        proper = FALSE;
+/*         proper = FALSE;
         while (!proper)
         {
             word[0] = 0;
@@ -286,19 +288,19 @@ void _main(void)
                 temp = syllable_type[random(15)];
             if (temp == V)
                 strcat(word,v_sounds[random(37)]);
-                //sound = v_sounds[random(114)][3];
+                // sound = v_sounds[random(114)][3];
             if (temp == CV)
                 strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]);
-                //sound = ic_sounds[random(789)] + v_sounds[random(114)];
+                // sound = ic_sounds[random(789)] + v_sounds[random(114)];
             if (temp == VC)
                 strcat(strcat(word,v_sounds[random(37)]),fc_sounds[random(484)]);
-                //sound = v_sounds[random(114)] + fc_sounds[random(1465)];
+                // sound = v_sounds[random(114)] + fc_sounds[random(1465)];
             if (temp == CVC)
                 strcat(strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]),fc_sounds[random(484)]);
-                //sound = ic_sounds[random(789)] + v_sounds[random(114)] + fc_sounds[random(1465)];
+                // sound = ic_sounds[random(789)] + v_sounds[random(114)] + fc_sounds[random(1465)];
             if (temp == CC)
                 strcat(word,mc_sounds[random(63)]);
-                //sound = mc_sounds[random(176)];
+                // sound = mc_sounds[random(176)];
             building = TRUE;
             while (building)
             {
@@ -319,49 +321,51 @@ void _main(void)
                 {
                     if (syllable == V)
                         strcat(word,v_sounds[random(37)]);
-                        //sound = v_sounds[random(114)][3];
+                        // sound = v_sounds[random(114)][3];
                     if (syllable == CV)
                         strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]);
-                        //sound = ic_sounds[random(789)] + v_sounds[random(114)];
+                        // sound = ic_sounds[random(789)] + v_sounds[random(114)];
                     if (syllable == VC)
                         strcat(strcat(word,v_sounds[random(37)]),fc_sounds[random(484)]);
-                        //sound = v_sounds[random(114)] + fc_sounds[random(1465)];
+                        // sound = v_sounds[random(114)] + fc_sounds[random(1465)];
                     if (syllable == CVC)
                         strcat(strcat(strcat(word,ic_sounds[random(257)]),v_sounds[random(37)]),fc_sounds[random(484)]);
-                        //sound = ic_sounds[random(789)] + v_sounds[random(114)] + fc_sounds[random(1465)];
+                        // sound = ic_sounds[random(789)] + v_sounds[random(114)] + fc_sounds[random(1465)];
                     if (syllable == CC)
                         strcat(word,mc_sounds[random(63)]);
-                        //sound = mc_sounds[random(176)];
+                        // sound = mc_sounds[random(176)];
                     temp = syllable;
                 }
             }
             if (strlen(word) > 2 && strlen(word) < 10)
                 proper = TRUE;
-        }
+        } */
 
     //  clear the screen
         clrscr();
 
     //  First name
 
-        first_name[0] = 0;
+/*         first_name[0] = 0;
         letter = word[0];
         letter = letter - 32;
         word[0] = letter;
 
         strcat(first_name,word);
 
-        printf("%s ",first_name);
+        printf("%s ",first_name); */
 
         sex[0] = 0;
 
-        if (word[0] == 65 || word[0] == 69 || word[0] == 73 || word[0] == 85 \
-               || word[0] == 89 || word[strlen(word) - 1] == 97 || word[strlen(word) - 1] == 105)
+/*         if (word[0] == 65 || word[0] == 69 || word[0] == 73 || word[0] == 85 \
+               || word[0] == 89 || word[strlen(word) - 1] == 97 || word[strlen(word) - 1] == 105) */
+               
+        if (roll("1D6") <= 2)
             strcat(sex,"Female");
         else
             strcat(sex,"Male");
 
-        proper = FALSE;
+/*         proper = FALSE;
         while (!proper)
         {
             word[0] = 0;
@@ -432,7 +436,7 @@ void _main(void)
 
         strcat(last_name,word);
 
-        printf("%s\n\n",last_name);
+        printf("%s\n\n",last_name); */
 
     //  Print character
 
