@@ -1,8 +1,9 @@
 
-from mpl_toolkits.mplot3d import Axes3D
-import matplotlib.pyplot as plt
+from pylab import *
+#from scipy import *
 import csv
 from pkg_resources import next
+from mpl_toolkits.mplot3d import Axes3D
 from diceroll import roll
 
 path = 'data/npc_homeworlds.csv'
@@ -14,8 +15,8 @@ print header
 
 win_title = 'Debt'
 
-fig = plt.figure(win_title)
-ax = fig.add_subplot(111, projection='3d')
+figure(win_title)
+ax = subplot(111, projection='3d')
 
 hex_code = {'0': 0,
             '1': 1,
@@ -104,19 +105,9 @@ for row in reader:
         color.append(0)
 ax.scatter(x, y, z, c=color, marker='o')
 
-# print 'Atmosphere =', x
-# print 'Law Level =', y
-# print 'Water =', z
-
-# for c, m, zl, zh in [('r', 'o', -50, -35), ('b', '^', -25, 25)]:
-#     x = randrange(n, 23, 32)
-#     y = randrange(n, 0, 100)
-#     z = randrange(n, zl, zh)
-#     ax.scatter(x, y, z, c=c, marker=m)
-
 ax.set_xlabel('Cash')
 ax.set_ylabel('Pension')
 ax.set_zlabel('Nobility')
 ax.set_title(win_title)
 
-plt.show()
+show()
