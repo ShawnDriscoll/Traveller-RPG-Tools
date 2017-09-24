@@ -12,9 +12,9 @@ df = pd.read_csv('data/npc_homeworlds.csv', delimiter=',').astype(str)
 
 win_title = 'Traveller Planetary TC\n'
 
-px_name = 'Size'
-py_name = 'Atmosphere'
-pz_name = 'Hydrographics'
+pz_name = 'Size'
+px_name = 'Atmosphere'
+py_name = 'Hydrographics'
 bubble_size = 'Size'
 scaler = 2.5
 
@@ -153,7 +153,7 @@ for row in range(df.shape[0]):
 
 if fluids:
     ax.scatter(x, y, z, marker='h', c='orange', s=sizes, linewidths=1, edgecolor='midnightblue')
-    plot([], [], [], marker='h', markerfacecolor='orange', markersize = 12, markeredgewidth=1, markeredgecolor='midnightblue', label='Non-Water Fluids')
+    plot([], [], [], marker='h', markerfacecolor='orange', markersize = 12, markeredgewidth=1, markeredgecolor='midnightblue', label='Fluid')
 
 x = []
 y = []
@@ -311,11 +311,22 @@ if water_worlds:
     ax.scatter(x, y, z, marker='h', c='royalblue', s=sizes, linewidths=1, edgecolor='black')
     plot([], [], [], marker='h', markerfacecolor='royalblue', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Water')
 
-legend(bbox_to_anchor=(1, 1), ncol=3, prop={'size': 12}, fancybox=True, title='Traveller World Types', shadow = True)
+legend(bbox_to_anchor=(1, 1), ncol=2, prop={'size': 12}, fancybox=True, title='World Characteristic Types', shadow = True)
 
+ax.set_xticks([0,1,2,3,4,5,6,7,8,9,10,11,12])
+ax.set_xticklabels(['Vacuum', 'Trace', 'Very Thin Tainted', 'Very Thin',
+            'Thin Tainted', 'Thin', 'Standard', 'Standard Tainted', 'Dense',
+            'Dense, Tainted', 'Exotic', 'Corrosive', 'Insidious', 'Dense High',
+            'Thin Low', 'Unusual'])
 ax.set_xlabel(px_name)
+
+ax.set_yticks([0,1,2,3,4,5,6,7,8,9,10])
+ax.set_yticklabels(['0%','10%','20%','30%','40%','50%','60%','70%','80%','90%','100%'])
 ax.set_ylabel(py_name)
-ax.set_zlabel(pz_name)
+
+ax.set_zticks([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15])
+ax.set_zticklabels(['Asteroid','1,000','2,000','3,000','4,000','5,000','6,000','7,000','8,000','9,000','10,000','11,000','12,000','13,000','14,000','15,000'])
+ax.set_zlabel(pz_name + ' (in miles)')
 
 title(win_title + ' (sampled from ' + str(len(range(df.shape[0]))) + ' worlds)')
 
