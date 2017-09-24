@@ -10,12 +10,12 @@ matplotlib.rcParams['legend.numpoints'] = 1
 
 df = pd.read_csv('data/npc_homeworlds.csv', delimiter=',').astype(str)
 
-win_title = 'Traveller Planetary TC\n'
+win_title = 'Traveller Economic TC\n'
 
 px_name = 'Atmosphere'
 py_name = 'Hydrographics'
-pz_name = 'Size'
-bubble_size = 'Size'
+pz_name = 'Population'
+bubble_size = 'Population'
 scaler = 80
 
 hex_code = {'0': 0,
@@ -82,14 +82,14 @@ y = []
 z = []
 colors = []
 sizes = []
- 
-deserts = False
- 
+
+pre_agricultures = False
+
 for row in range(df.shape[0]):
     if not pd.isnull(df.ix[row, 'Trade_Codes']):
         trade_codes = df.ix[row, 'Trade_Codes']
-        if 'De' in trade_codes:
-            deserts = True
+        if 'Pa' in trade_codes:
+            pre_agricultures = True
             px = hex_code[df.ix[row, px_name]] + roll('FLUX') / 10.0
             x.append(px)
             py = hex_code[df.ix[row, py_name]] + roll('FLUX') / 10.0
@@ -97,12 +97,14 @@ for row in range(df.shape[0]):
             pz = hex_code[df.ix[row, pz_name]] + roll('FLUX') / 10.0
             z.append(pz)
             ps = hex_code[df.ix[row, bubble_size]]
+            if ps == 0:
+                ps = 0.3
             #sizes.append(ps ** scaler)
             sizes.append(scaler)
- 
-if deserts:
-    ax.scatter(x, y, z, marker='h', c='tan', s=sizes, linewidths=1, edgecolor='black')
-    plot([], [], [], marker='h', markerfacecolor='tan', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Desert')
+
+if pre_agricultures:
+    ax.scatter(x, y, z, marker='h', c='purple', s=sizes, linewidths=1, edgecolor='black')
+    plot([], [], [], marker='h', markerfacecolor='purple', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Pre-Agricultural')
 
 x = []
 y = []
@@ -110,13 +112,13 @@ z = []
 colors = []
 sizes = []
 
-fluids = False
+agricultures = False
 
 for row in range(df.shape[0]):
     if not pd.isnull(df.ix[row, 'Trade_Codes']):
         trade_codes = df.ix[row, 'Trade_Codes']
-        if 'Fl' in trade_codes:
-            fluids = True
+        if 'Ag' in trade_codes:
+            agricultures = True
             px = hex_code[df.ix[row, px_name]] + roll('FLUX') / 10.0
             x.append(px)
             py = hex_code[df.ix[row, py_name]] + roll('FLUX') / 10.0
@@ -124,26 +126,28 @@ for row in range(df.shape[0]):
             pz = hex_code[df.ix[row, pz_name]] + roll('FLUX') / 10.0
             z.append(pz)
             ps = hex_code[df.ix[row, bubble_size]]
+            if ps == 0:
+                ps = 0.3
             #sizes.append(ps ** scaler)
             sizes.append(scaler)
 
-if fluids:
-    ax.scatter(x, y, z, marker='h', c='orange', s=sizes, linewidths=1, edgecolor='black')
-    plot([], [], [], marker='h', markerfacecolor='orange', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Fluid')
+if agricultures:
+    ax.scatter(x, y, z, marker='h', c='forestgreen', s=sizes, linewidths=1, edgecolor='black')
+    plot([], [], [], marker='h', markerfacecolor='forestgreen', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Agricultural')
 
 x = []
 y = []
 z = []
 colors = []
 sizes = []
-
-gardens = False
-
+ 
+non_agricultures = False
+ 
 for row in range(df.shape[0]):
     if not pd.isnull(df.ix[row, 'Trade_Codes']):
         trade_codes = df.ix[row, 'Trade_Codes']
-        if 'Ga' in trade_codes:
-            gardens = True
+        if 'Na' in trade_codes:
+            non_agricultures = True
             px = hex_code[df.ix[row, px_name]] + roll('FLUX') / 10.0
             x.append(px)
             py = hex_code[df.ix[row, py_name]] + roll('FLUX') / 10.0
@@ -151,39 +155,14 @@ for row in range(df.shape[0]):
             pz = hex_code[df.ix[row, pz_name]] + roll('FLUX') / 10.0
             z.append(pz)
             ps = hex_code[df.ix[row, bubble_size]]
-            #sizes.append(ps ** scaler)
-            sizes.append(scaler)
-
-if gardens:
-    ax.scatter(x, y, z, marker='h', c='seagreen', s=sizes, linewidths=1, edgecolor='black')
-    plot([], [], [], marker='h', markerfacecolor='seagreen', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Garden')
-
-x = []
-y = []
-z = []
-colors = []
-sizes = []
-
-hells = False
-
-for row in range(df.shape[0]):
-    if not pd.isnull(df.ix[row, 'Trade_Codes']):
-        trade_codes = df.ix[row, 'Trade_Codes']
-        if 'He' in trade_codes:
-            hells = True
-            px = hex_code[df.ix[row, px_name]] + roll('FLUX') / 10.0
-            x.append(px)
-            py = hex_code[df.ix[row, py_name]] + roll('FLUX') / 10.0
-            y.append(py)
-            pz = hex_code[df.ix[row, pz_name]] + roll('FLUX') / 10.0
-            z.append(pz)
-            ps = hex_code[df.ix[row, bubble_size]]
+            if ps == 0:
+                ps = 0.3
             #sizes.append(ps ** scaler)
             sizes.append(scaler)
  
-if hells:
-    ax.scatter(x, y, z, marker='h', c='red', s=sizes, linewidths=1, edgecolor='black')
-    plot([], [], [], marker='h', markerfacecolor='red', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Hell')
+if non_agricultures:
+    ax.scatter(x, y, z, marker='h', c='lightblue', s=sizes, linewidths=1, edgecolor='black')
+    plot([], [], [], marker='h', markerfacecolor='lightblue', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Non-Agricultural')
 
 x = []
 y = []
@@ -191,13 +170,13 @@ z = []
 colors = []
 sizes = []
 
-ice_caps = False
+pre_industrials = False
 
 for row in range(df.shape[0]):
     if not pd.isnull(df.ix[row, 'Trade_Codes']):
         trade_codes = df.ix[row, 'Trade_Codes']
-        if 'Ic' in trade_codes:
-            ice_caps = True
+        if 'Pi' in trade_codes:
+            pre_industrials = True
             px = hex_code[df.ix[row, px_name]] + roll('FLUX') / 10.0
             x.append(px)
             py = hex_code[df.ix[row, py_name]] + roll('FLUX') / 10.0
@@ -205,12 +184,14 @@ for row in range(df.shape[0]):
             pz = hex_code[df.ix[row, pz_name]] + roll('FLUX') / 10.0
             z.append(pz)
             ps = hex_code[df.ix[row, bubble_size]]
+            if ps == 0:
+                ps = 0.3
             #sizes.append(ps ** scaler)
             sizes.append(scaler)
 
-if ice_caps:
-    ax.scatter(x, y, z, marker='h', c='cyan', s=sizes, linewidths=1, edgecolor='black')
-    plot([], [], [], marker='h', markerfacecolor='cyan', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Ice-Capped')
+if pre_industrials:
+    ax.scatter(x, y, z, marker='h', c='blue', s=sizes, linewidths=1, edgecolor='black')
+    plot([], [], [], marker='h', markerfacecolor='blue', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Pre-Industrial')
 
 x = []
 y = []
@@ -218,13 +199,13 @@ z = []
 colors = []
 sizes = []
 
-ocean_worlds = False
+industrials = False
 
 for row in range(df.shape[0]):
     if not pd.isnull(df.ix[row, 'Trade_Codes']):
         trade_codes = df.ix[row, 'Trade_Codes']
-        if 'Oc' in trade_codes:
-            ocean_worlds = True
+        if 'In' in trade_codes:
+            industrials = True
             px = hex_code[df.ix[row, px_name]] + roll('FLUX') / 10.0
             x.append(px)
             py = hex_code[df.ix[row, py_name]] + roll('FLUX') / 10.0
@@ -232,39 +213,14 @@ for row in range(df.shape[0]):
             pz = hex_code[df.ix[row, pz_name]] + roll('FLUX') / 10.0
             z.append(pz)
             ps = hex_code[df.ix[row, bubble_size]]
+            if ps == 0:
+                ps = 0.3
             #sizes.append(ps ** scaler)
             sizes.append(scaler)
 
-if ocean_worlds:
-    ax.scatter(x, y, z, marker='h', c='royalblue', s=sizes, linewidths=1, edgecolor='black')
-    plot([], [], [], marker='h', markerfacecolor='royalblue', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Ocean')
-
-x = []
-y = []
-z = []
-colors = []
-sizes = []
-
-vacuums = False
-
-for row in range(df.shape[0]):
-    if not pd.isnull(df.ix[row, 'Trade_Codes']):
-        trade_codes = df.ix[row, 'Trade_Codes']
-        if 'Va' in trade_codes:
-            vacuums = True
-            px = hex_code[df.ix[row, px_name]] + roll('FLUX') / 10.0
-            x.append(px)
-            py = hex_code[df.ix[row, py_name]] + roll('FLUX') / 10.0
-            y.append(py)
-            pz = hex_code[df.ix[row, pz_name]] + roll('FLUX') / 10.0
-            z.append(pz)
-            ps = hex_code[df.ix[row, bubble_size]]
-            #sizes.append(ps ** scaler)
-            sizes.append(scaler)
-
-if vacuums:
+if industrials:
     ax.scatter(x, y, z, marker='h', c='gray', s=sizes, linewidths=1, edgecolor='black')
-    plot([], [], [], marker='h', markerfacecolor='gray', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Vacuum')
+    plot([], [], [], marker='h', markerfacecolor='gray', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Industrial')
 
 x = []
 y = []
@@ -272,13 +228,13 @@ z = []
 colors = []
 sizes = []
 
-asteroids = False
+poors = False
 
 for row in range(df.shape[0]):
     if not pd.isnull(df.ix[row, 'Trade_Codes']):
         trade_codes = df.ix[row, 'Trade_Codes']
-        if 'As' in trade_codes:
-            asteroids = True
+        if 'Po' in trade_codes:
+            poors = True
             px = hex_code[df.ix[row, px_name]] + roll('FLUX') / 10.0
             x.append(px)
             py = hex_code[df.ix[row, py_name]] + roll('FLUX') / 10.0
@@ -286,12 +242,14 @@ for row in range(df.shape[0]):
             pz = hex_code[df.ix[row, pz_name]] + roll('FLUX') / 10.0
             z.append(pz)
             ps = hex_code[df.ix[row, bubble_size]]
+            if ps == 0:
+                ps = 0.3
             #sizes.append(ps ** scaler)
             sizes.append(scaler)
-
-if asteroids:
-    ax.scatter(x, y, z, marker='h', c='ivory', s=sizes, linewidths=1, edgecolor='black')
-    plot([], [], [], marker='h', markerfacecolor='ivory', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Asteroid')
+ 
+if poors:
+    ax.scatter(x, y, z, marker='h', c='tan', s=sizes, linewidths=1, edgecolor='black')
+    plot([], [], [], marker='h', markerfacecolor='tan', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Poor')
 
 x = []
 y = []
@@ -299,13 +257,13 @@ z = []
 colors = []
 sizes = []
 
-water_worlds = False
+pre_riches = False
 
 for row in range(df.shape[0]):
     if not pd.isnull(df.ix[row, 'Trade_Codes']):
         trade_codes = df.ix[row, 'Trade_Codes']
-        if 'Wa' in trade_codes:
-            water_worlds = True
+        if 'Pr' in trade_codes:
+            pre_riches = True
             px = hex_code[df.ix[row, px_name]] + roll('FLUX') / 10.0
             x.append(px)
             py = hex_code[df.ix[row, py_name]] + roll('FLUX') / 10.0
@@ -313,14 +271,74 @@ for row in range(df.shape[0]):
             pz = hex_code[df.ix[row, pz_name]] + roll('FLUX') / 10.0
             z.append(pz)
             ps = hex_code[df.ix[row, bubble_size]]
+            if ps == 0:
+                ps = 0.3
             #sizes.append(ps ** scaler)
             sizes.append(scaler)
 
-if water_worlds:
-    ax.scatter(x, y, z, marker='h', c='royalblue', s=sizes, linewidths=1, edgecolor='black')
-    plot([], [], [], marker='h', markerfacecolor='royalblue', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Water')
+if pre_riches:
+    ax.scatter(x, y, z, marker='h', c='yellow', s=sizes, linewidths=1, edgecolor='black')
+    plot([], [], [], marker='h', markerfacecolor='yellow', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Pre-Rich')
 
-legend(bbox_to_anchor=(1, 1), ncol=2, prop={'size': 12}, fancybox=True, title='World Characteristic Types', shadow = True)
+x = []
+y = []
+z = []
+colors = []
+sizes = []
+
+riches = False
+
+for row in range(df.shape[0]):
+    if not pd.isnull(df.ix[row, 'Trade_Codes']):
+        trade_codes = df.ix[row, 'Trade_Codes']
+        if 'Ri' in trade_codes:
+            riches = True
+            px = hex_code[df.ix[row, px_name]] + roll('FLUX') / 10.0
+            x.append(px)
+            py = hex_code[df.ix[row, py_name]] + roll('FLUX') / 10.0
+            y.append(py)
+            pz = hex_code[df.ix[row, pz_name]] + roll('FLUX') / 10.0
+            z.append(pz)
+            ps = hex_code[df.ix[row, bubble_size]]
+            if ps == 0:
+                ps = 0.3
+            #sizes.append(ps ** scaler)
+            sizes.append(scaler)
+
+if riches:
+    ax.scatter(x, y, z, marker='h', c='red', s=sizes, linewidths=1, edgecolor='black')
+    plot([], [], [], marker='h', markerfacecolor='red', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Rich')
+
+x = []
+y = []
+z = []
+colors = []
+sizes = []
+
+prisons = False
+
+for row in range(df.shape[0]):
+    if not pd.isnull(df.ix[row, 'Trade_Codes']):
+        trade_codes = df.ix[row, 'Trade_Codes']
+        if 'Px' in trade_codes:
+            prisons = True
+            px = hex_code[df.ix[row, px_name]] + roll('FLUX') / 10.0
+            x.append(px)
+            py = hex_code[df.ix[row, py_name]] + roll('FLUX') / 10.0
+            y.append(py)
+            pz = hex_code[df.ix[row, pz_name]] + roll('FLUX') / 10.0
+            z.append(pz)
+            ps = hex_code[df.ix[row, bubble_size]]
+            if ps == 0:
+                ps = 0.3
+            #sizes.append(ps ** scaler)
+            sizes.append(scaler)
+
+if prisons:
+    ax.scatter(x, y, z, marker='h', c='black', s=sizes, linewidths=1, edgecolor='red')
+    plot([], [], [], marker='h', markerfacecolor='black', markersize = 12, markeredgewidth=1, markeredgecolor='red', label='Prison')
+
+legend(bbox_to_anchor=(1, 1), ncol=2, prop={'size': 12}, fancybox=True, title='World Economy Types', shadow = True)
 
 ax.set_xlim3d(-1,16)
 ax.set_xticks(range(16))
@@ -337,8 +355,12 @@ ax.set_ylabel(py_name + ' Percentage')
 
 ax.set_zlim3d(-1,16)
 ax.set_zticks(range(16))
-ax.set_zticklabels(['Asteroid','1,000','2,000','3,000','4,000','5,000','6,000','7,000','8,000','9,000','10,000','11,000','12,000','13,000','14,000','15,000'])
-ax.set_zlabel(pz_name + ' (in miles)')
+ax.set_zticklabels(['Unpopulated', 'Tens', 'Hundreds', 'Thousands',
+                    'Ten Thousands', 'Hund. Thousands', 'Millions',
+                    'Ten Millions', 'Hund. Millions', 'Billions',
+                    'Ten Billions', 'Hund. Billions', 'Trillions',
+                    'Ten Trillions', 'Hund. Trillions', 'Quadrillions'])
+ax.set_zlabel(pz_name)
 
 title(win_title + ' (sampled from ' + str(len(range(df.shape[0]))) + ' worlds)')
 
