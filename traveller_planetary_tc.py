@@ -82,6 +82,33 @@ y = []
 z = []
 colors = []
 sizes = []
+
+asteroids = False
+
+for row in range(df.shape[0]):
+    if not pd.isnull(df.ix[row, 'Trade_Codes']):
+        trade_codes = df.ix[row, 'Trade_Codes']
+        if 'As' in trade_codes:
+            asteroids = True
+            px = hex_code[df.ix[row, px_name]] + roll('FLUX') / 10.0
+            x.append(px)
+            py = hex_code[df.ix[row, py_name]] + roll('FLUX') / 10.0
+            y.append(py)
+            pz = hex_code[df.ix[row, pz_name]] + roll('FLUX') / 10.0
+            z.append(pz)
+            ps = hex_code[df.ix[row, bubble_size]]
+            #sizes.append(ps ** scaler)
+            sizes.append(scaler)
+
+if asteroids:
+    ax.scatter(x, y, z, marker='h', c='ivory', s=sizes, linewidths=1, edgecolor='black')
+    plot([], [], [], marker='h', markerfacecolor='ivory', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Asteroid')
+
+x = []
+y = []
+z = []
+colors = []
+sizes = []
  
 deserts = False
  
@@ -265,33 +292,6 @@ for row in range(df.shape[0]):
 if vacuums:
     ax.scatter(x, y, z, marker='h', c='gray', s=sizes, linewidths=1, edgecolor='black')
     plot([], [], [], marker='h', markerfacecolor='gray', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Vacuum')
-
-x = []
-y = []
-z = []
-colors = []
-sizes = []
-
-asteroids = False
-
-for row in range(df.shape[0]):
-    if not pd.isnull(df.ix[row, 'Trade_Codes']):
-        trade_codes = df.ix[row, 'Trade_Codes']
-        if 'As' in trade_codes:
-            asteroids = True
-            px = hex_code[df.ix[row, px_name]] + roll('FLUX') / 10.0
-            x.append(px)
-            py = hex_code[df.ix[row, py_name]] + roll('FLUX') / 10.0
-            y.append(py)
-            pz = hex_code[df.ix[row, pz_name]] + roll('FLUX') / 10.0
-            z.append(pz)
-            ps = hex_code[df.ix[row, bubble_size]]
-            #sizes.append(ps ** scaler)
-            sizes.append(scaler)
-
-if asteroids:
-    ax.scatter(x, y, z, marker='h', c='ivory', s=sizes, linewidths=1, edgecolor='black')
-    plot([], [], [], marker='h', markerfacecolor='ivory', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Asteroid')
 
 x = []
 y = []
