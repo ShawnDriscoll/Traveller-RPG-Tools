@@ -17,6 +17,7 @@ py_name = 'Hydrographics'
 pz_name = 'Size'
 bubble_size = 'Size'
 scaler = 2.5
+worlds = 0
 
 hex_code = {'0': 0,
             '1': 1,
@@ -99,6 +100,7 @@ for row in range(df.shape[0]):
             ps = hex_code[df.ix[row, bubble_size]]
             sizes.append(0.3 ** scaler)
             #sizes.append(scaler)
+            worlds += 1
             if ps >= 12:
                 ax.text(px,
                     py,
@@ -137,6 +139,7 @@ for row in range(df.shape[0]):
             ps = hex_code[df.ix[row, bubble_size]]
             sizes.append(ps ** scaler)
             #sizes.append(scaler)
+            worlds += 1
             if ps >= 12:
                 ax.text(px,
                     py,
@@ -175,6 +178,7 @@ for row in range(df.shape[0]):
             ps = hex_code[df.ix[row, bubble_size]]
             sizes.append(ps ** scaler)
             #sizes.append(scaler)
+            worlds += 1
             if ps >= 12:
                 ax.text(px,
                     py,
@@ -213,6 +217,7 @@ for row in range(df.shape[0]):
             ps = hex_code[df.ix[row, bubble_size]]
             sizes.append(ps ** scaler)
             #sizes.append(scaler)
+            worlds += 1
             if ps >= 12:
                 ax.text(px,
                     py,
@@ -251,6 +256,7 @@ for row in range(df.shape[0]):
             ps = hex_code[df.ix[row, bubble_size]]
             sizes.append(ps ** scaler)
             #sizes.append(scaler)
+            worlds += 1
             if ps >= 12:
                 ax.text(px,
                     py,
@@ -289,6 +295,7 @@ for row in range(df.shape[0]):
             ps = hex_code[df.ix[row, bubble_size]]
             sizes.append(ps ** scaler)
             #sizes.append(scaler)
+            worlds += 1
             if ps >= 12:
                 ax.text(px,
                     py,
@@ -327,6 +334,7 @@ for row in range(df.shape[0]):
             ps = hex_code[df.ix[row, bubble_size]]
             sizes.append(ps ** scaler)
             #sizes.append(scaler)
+            worlds += 1
             if ps >= 12:
                 ax.text(px,
                     py,
@@ -340,8 +348,8 @@ for row in range(df.shape[0]):
                 print row, df.ix[row, 'Homeworld'], '[' + world_population[ps] + ']'
 
 if ocean_worlds:
-    ax.scatter(x, y, z, marker='h', c='royalblue', s=sizes, linewidths=1, edgecolor='black')
-    plot([], [], [], marker='h', markerfacecolor='royalblue', markersize = 12, markeredgewidth=1, markeredgecolor='black', label='Ocean')
+    ax.scatter(x, y, z, marker='h', c='royalblue', s=sizes, linewidths=1, edgecolor='cyan')
+    plot([], [], [], marker='h', markerfacecolor='royalblue', markersize = 12, markeredgewidth=1, markeredgecolor='cyan', label='Ocean')
 
 x = []
 y = []
@@ -365,6 +373,7 @@ for row in range(df.shape[0]):
             ps = hex_code[df.ix[row, bubble_size]]
             sizes.append(ps ** scaler)
             #sizes.append(scaler)
+            worlds += 1
             if ps >= 12:
                 ax.text(px,
                     py,
@@ -403,6 +412,7 @@ for row in range(df.shape[0]):
             ps = hex_code[df.ix[row, bubble_size]]
             sizes.append(ps ** scaler)
             #sizes.append(scaler)
+            worlds += 1
             if ps >= 12:
                 ax.text(px,
                     py,
@@ -439,6 +449,6 @@ ax.set_zticks(range(16))
 ax.set_zticklabels(['Asteroid','1,000','2,000','3,000','4,000','5,000','6,000','7,000','8,000','9,000','10,000','11,000','12,000','13,000','14,000','15,000'])
 ax.set_zlabel(pz_name + ' (in miles)')
 
-title(win_title + ' (sampled from ' + str(len(range(df.shape[0]))) + ' worlds)')
+title(win_title + ' (' + str(worlds) + ' out of a sampled ' + str(len(range(df.shape[0]))) + ' worlds)')
 
 show()
