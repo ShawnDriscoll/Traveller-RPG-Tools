@@ -281,10 +281,11 @@ ax.set_yticks(range(11))
 ax.set_yticklabels(['0','10','20','30','40','50','60','70','80','90','100'])
 ax.set_ylabel(py_name + ' Percentage')
 
-ax.set_zlim3d(-1,16)
-ax.set_zticks(range(16))
-ax.set_zticklabels(['Asteroid','1,000','2,000','3,000','4,000','5,000','6,000','7,000','8,000','9,000','10,000','11,000','12,000','13,000','14,000','15,000'])
-ax.set_zlabel(pz_name + ' (in miles)')
+ax.set_zlim3d(-1,11)
+ax.set_zticks(range(11))
+ax.set_zticklabels(['Asteroid Belt', '1,600 km', '3,200 km', '4,800 km', '6,400 km',
+                    '8,000 km', '9,600 km', '11,200 km', '12,800 km', '14,400 km', '16,000 km'])
+ax.set_zlabel(pz_name + ' (in kilometers)')
 
 title(win_title + ' (sampled from ' + str(len(range(df.shape[0]))) + ' worlds)')
 
