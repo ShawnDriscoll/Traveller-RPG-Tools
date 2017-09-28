@@ -101,7 +101,7 @@ for row in range(df.shape[0]):
             sizes.append(0.3 ** scaler)
             #sizes.append(scaler)
             worlds += 1
-            if ps >= 12:
+            if hex_code[df.ix[row, 'Population']] >= 12:
                 ax.text(px,
                     py,
                     pz,
@@ -111,7 +111,7 @@ for row in range(df.shape[0]):
                     #horizontalalignment='center',
                     #verticalalignment='center'
                     )
-                print row, df.ix[row, 'Homeworld'], '[' + world_population[ps] + ']'
+                print row, df.ix[row, 'Homeworld'], '[' + world_population[hex_code[df.ix[row, 'Population']]] + ']'
 
 if asteroids:
     ax.scatter(x, y, z, marker='h', c='ivory', s=sizes, linewidths=1, edgecolor='black')
@@ -140,7 +140,7 @@ for row in range(df.shape[0]):
             sizes.append(ps ** scaler)
             #sizes.append(scaler)
             worlds += 1
-            if ps >= 12:
+            if hex_code[df.ix[row, 'Population']] >= 12:
                 ax.text(px,
                     py,
                     pz,
@@ -150,7 +150,7 @@ for row in range(df.shape[0]):
                     #horizontalalignment='center',
                     #verticalalignment='center'
                     )
-                print row, df.ix[row, 'Homeworld'], '[' + world_population[ps] + ']'
+                print row, df.ix[row, 'Homeworld'], '[' + world_population[hex_code[df.ix[row, 'Population']]] + ']'
                 
 if deserts:
     ax.scatter(x, y, z, marker='h', c='tan', s=sizes, linewidths=1, edgecolor='black')
@@ -179,7 +179,7 @@ for row in range(df.shape[0]):
             sizes.append(ps ** scaler)
             #sizes.append(scaler)
             worlds += 1
-            if ps >= 12:
+            if hex_code[df.ix[row, 'Population']] >= 12:
                 ax.text(px,
                     py,
                     pz,
@@ -189,7 +189,7 @@ for row in range(df.shape[0]):
                     #horizontalalignment='center',
                     #verticalalignment='center'
                     )
-                print row, df.ix[row, 'Homeworld'], '[' + world_population[ps] + ']'
+                print row, df.ix[row, 'Homeworld'], '[' + world_population[hex_code[df.ix[row, 'Population']]] + ']'
 
 if fluids:
     ax.scatter(x, y, z, marker='h', c='orange', s=sizes, linewidths=1, edgecolor='black')
@@ -218,7 +218,7 @@ for row in range(df.shape[0]):
             sizes.append(ps ** scaler)
             #sizes.append(scaler)
             worlds += 1
-            if ps >= 12:
+            if hex_code[df.ix[row, 'Population']] >= 12:
                 ax.text(px,
                     py,
                     pz,
@@ -228,7 +228,7 @@ for row in range(df.shape[0]):
                     #horizontalalignment='center',
                     #verticalalignment='center'
                     )
-                print row, df.ix[row, 'Homeworld'], '[' + world_population[ps] + ']'
+                print row, df.ix[row, 'Homeworld'], '[' + world_population[hex_code[df.ix[row, 'Population']]] + ']'
 
 if gardens:
     ax.scatter(x, y, z, marker='h', c='seagreen', s=sizes, linewidths=1, edgecolor='black')
@@ -257,7 +257,7 @@ for row in range(df.shape[0]):
             sizes.append(ps ** scaler)
             #sizes.append(scaler)
             worlds += 1
-            if ps >= 12:
+            if hex_code[df.ix[row, 'Population']] >= 12:
                 ax.text(px,
                     py,
                     pz,
@@ -267,7 +267,7 @@ for row in range(df.shape[0]):
                     #horizontalalignment='center',
                     #verticalalignment='center'
                     )
-                print row, df.ix[row, 'Homeworld'], '[' + world_population[ps] + ']'
+                print row, df.ix[row, 'Homeworld'], '[' + world_population[hex_code[df.ix[row, 'Population']]] + ']'
 
 if hells:
     ax.scatter(x, y, z, marker='h', c='red', s=sizes, linewidths=1, edgecolor='black')
@@ -296,7 +296,7 @@ for row in range(df.shape[0]):
             sizes.append(ps ** scaler)
             #sizes.append(scaler)
             worlds += 1
-            if ps >= 12:
+            if hex_code[df.ix[row, 'Population']] >= 12:
                 ax.text(px,
                     py,
                     pz,
@@ -306,7 +306,7 @@ for row in range(df.shape[0]):
                     #horizontalalignment='center',
                     #verticalalignment='center'
                     )
-                print row, df.ix[row, 'Homeworld'], '[' + world_population[ps] + ']'
+                print row, df.ix[row, 'Homeworld'], '[' + world_population[hex_code[df.ix[row, 'Population']]] + ']'
 
 if ice_caps:
     ax.scatter(x, y, z, marker='h', c='cyan', s=sizes, linewidths=1, edgecolor='black')
@@ -335,7 +335,7 @@ for row in range(df.shape[0]):
             sizes.append(ps ** scaler)
             #sizes.append(scaler)
             worlds += 1
-            if ps >= 12:
+            if hex_code[df.ix[row, 'Population']] >= 12:
                 ax.text(px,
                     py,
                     pz,
@@ -345,7 +345,7 @@ for row in range(df.shape[0]):
                     #horizontalalignment='center',
                     #verticalalignment='center'
                     )
-                print row, df.ix[row, 'Homeworld'], '[' + world_population[ps] + ']'
+                print row, df.ix[row, 'Homeworld'], '[' + world_population[hex_code[df.ix[row, 'Population']]] + ']'
 
 if ocean_worlds:
     ax.scatter(x, y, z, marker='h', c='royalblue', s=sizes, linewidths=1, edgecolor='cyan')
@@ -374,7 +374,7 @@ for row in range(df.shape[0]):
             sizes.append(ps ** scaler)
             #sizes.append(scaler)
             worlds += 1
-            if ps >= 12:
+            if hex_code[df.ix[row, 'Population']] >= 12:
                 ax.text(px,
                     py,
                     pz,
@@ -384,7 +384,7 @@ for row in range(df.shape[0]):
                     #horizontalalignment='center',
                     #verticalalignment='center'
                     )
-                print row, df.ix[row, 'Homeworld'], '[' + world_population[ps] + ']'
+                print row, df.ix[row, 'Homeworld'], '[' + world_population[hex_code[df.ix[row, 'Population']]] + ']'
 
 if vacuums:
     ax.scatter(x, y, z, marker='h', c='gray', s=sizes, linewidths=1, edgecolor='black')
@@ -413,7 +413,7 @@ for row in range(df.shape[0]):
             sizes.append(ps ** scaler)
             #sizes.append(scaler)
             worlds += 1
-            if ps >= 12:
+            if hex_code[df.ix[row, 'Population']] >= 12:
                 ax.text(px,
                     py,
                     pz,
@@ -423,7 +423,7 @@ for row in range(df.shape[0]):
                     #horizontalalignment='center',
                     #verticalalignment='center'
                     )
-                print row, df.ix[row, 'Homeworld'], '[' + world_population[ps] + ']'
+                print row, df.ix[row, 'Homeworld'], '[' + world_population[hex_code[df.ix[row, 'Population']]] + ']'
 
 if water_worlds:
     ax.scatter(x, y, z, marker='h', c='royalblue', s=sizes, linewidths=1, edgecolor='black')
