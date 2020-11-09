@@ -1,26 +1,13 @@
 
-###########
-##Eclipse
-###########
-.plugins/
-.lock
-.log
-.ini
-.metadata/
-.project
-.settings/
-.pydevproject
-org.*
-com.*
-.classpath
-*.ini
+#############
+## diceroll
+#############
+Logs/
 *.log
-/Debug
-/Release
-.cproject
+
 
 #############
-## Windows detritus
+## Windows
 #############
 
 # Windows image file caches
@@ -30,15 +17,14 @@ ehthumbs.db
 # Folder config file
 Desktop.ini
 
-# Mac crap
+# Mac
 .DS_Store
 
 
-#############
+############
 ## Python
-#############
+############
 
-*.pyx
 *.pyc
 
 # Packages
@@ -53,22 +39,13 @@ sdist/
 develop-eggs/
 .installed.cfg
 
-############
-## TI-GCC
-############
-*.tpr
-*.89z
-*.9xz
-*.v2z
-*.o
-*.s
-
-###########
+#########
 ## gcc
-###########
+#########
 *.exe
 
-###########
+
+############
 ## Jython
-###########
+############
 *.class
