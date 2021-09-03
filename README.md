@@ -1,3 +1,7 @@
+<a style="text-decoration:none" href="https://github.com/ShawnDriscoll/Traveller-RPG-Tools/stargazers">
+    <img src="https://img.shields.io/github/stars/ShawnDriscoll/Traveller-RPG-Tools.svg" alt="Stars" />
+</a>
+
 Traveller-RPG-Tools<br>
 ===================<br>
 Some of this code was written/compiled in Classic Python 2.5.4 for Windows XP/7/10.<br><br>
